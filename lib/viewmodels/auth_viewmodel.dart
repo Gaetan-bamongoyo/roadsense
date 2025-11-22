@@ -55,7 +55,7 @@ class AuthViewModel extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      _error = 'Erreur de connexion';
+      _error = 'Erreur de connexion $e';
       _isLoading = false;
       notifyListeners();
       return false;

@@ -41,8 +41,8 @@ class Paiement {
     'statut_sync': statutSync,
     'poste_id': posteId,
     'nom_poste': nomPoste,
-    'created_at': createdAt.toIso8601String(),
-    'updated_at': updatedAt.toIso8601String(),
+    'createdAt': createdAt.toIso8601String(),
+    'updatedAt': updatedAt.toIso8601String(),
   };
 
   factory Paiement.fromJson(Map<String, dynamic> json) => Paiement(
@@ -56,8 +56,8 @@ class Paiement {
     statutSync: json['statut_sync'] as int,
     posteId: json['poste_id'] as int,
     nomPoste: json['nom_poste'] as String,
-    createdAt: DateTime.parse(json['created_at'] as String),
-    updatedAt: DateTime.parse(json['updated_at'] as String),
+    createdAt: DateTime.parse(json['createdAt'] as String),
+    updatedAt: DateTime.parse(json['updatedAt'] as String),
   );
 
   Paiement copyWith({

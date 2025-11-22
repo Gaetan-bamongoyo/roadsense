@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:roadsense/models/categorie.dart';
 import 'package:roadsense/models/engin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,6 +23,25 @@ class StorageService {
     await _prefs?.setString('nom_poste', nomPoste);
     await _prefs?.setString('agent_nom', agentNom);
     await _prefs?.setBool('is_logged_in', true);
+  }
+
+  Future<List<Categorie>> loadCategorie() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('categories');
+    // print(data);
+
+    if (data != null) {
+      final List<dynamic> jsonList = jsonDecode(data);
+      return jsonList.map((json) => Categorie.fromJson(json)).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Future<void> saveCategorie(List<Categorie> categories) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonList = categories.map((s) => s.toJson()).toList();
+    await prefs.setString('categories', jsonEncode(jsonList));
   }
 
   Future<List<Taxe>> loadTarif() async {

@@ -14,7 +14,7 @@ class DatabaseService {
   /// Retourne la base de données initialisée ou la crée si nécessaire
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('roadsenstss.db');
+    _database = await _initDB('roadsense.db');
     return _database!;
   }
 
@@ -34,8 +34,8 @@ class DatabaseService {
         nom_poste TEXT NOT NULL UNIQUE,
         agent_nom TEXT NOT NULL,
         mot_de_passe TEXT NOT NULL,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL
       )
     ''');
 
@@ -45,8 +45,8 @@ class DatabaseService {
         designation TEXT NOT NULL UNIQUE,
         icon_name TEXT,
         description TEXT,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL
       )
     ''');
 
@@ -57,8 +57,8 @@ class DatabaseService {
         tarif REAL NOT NULL,
         icon_name TEXT NOT NULL,
         categorie_id INTEGER,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL,
         FOREIGN KEY (categorie_id) REFERENCES categories (id)
       )
     ''');
@@ -75,8 +75,8 @@ class DatabaseService {
         statut_sync INTEGER DEFAULT 0,
         poste_id INTEGER NOT NULL,
         nom_poste TEXT NOT NULL,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL,
         FOREIGN KEY (type_engin_id) REFERENCES engins (id),
         FOREIGN KEY (poste_id) REFERENCES postes (id)
       )
@@ -93,8 +93,8 @@ class DatabaseService {
       'nom_poste': 'A1',
       'agent_nom': 'Agent Demo',
       'mot_de_passe': 'demo123',
-      'created_at': now,
-      'updated_at': now,
+      'createdAt': now,
+      'updatedAt': now,
     });
 
     final engins = [
@@ -139,8 +139,8 @@ class DatabaseService {
     for (var engin in engins) {
       await db.insert('engins', {
         ...engin,
-        'created_at': now,
-        'updated_at': now,
+        'createdAt': now,
+        'updatedAt': now,
       });
     }
 
@@ -179,8 +179,8 @@ class DatabaseService {
     for (var cat in categories) {
       await db.insert('categories', {
         ...cat,
-        'created_at': now,
-        'updated_at': now,
+        'createdAt': now,
+        'updatedAt': now,
       });
     }
   }
@@ -201,6 +201,7 @@ class DatabaseService {
       limit: 1,
     );
     if (maps.isEmpty) return null;
+    // print(maps);
     return User.fromJson(maps.first);
   }
 
@@ -212,7 +213,7 @@ class DatabaseService {
       where: 'categorie_id = ?',
       whereArgs: [id],
     );
-    print(maps);
+    // print(maps);
     return maps.map((map) => Taxe.fromJson(map)).toList();
   }
 
@@ -259,6 +260,7 @@ class DatabaseService {
       where: 'statut_sync = ?',
       whereArgs: [0],
     );
+    print(maps);
     return maps.map((map) => Paiement.fromJson(map)).toList();
   }
 
@@ -267,7 +269,7 @@ class DatabaseService {
     final db = await database;
     return await db.update(
       'paiements',
-      {'statut_sync': statut, 'updated_at': DateTime.now().toIso8601String()},
+      {'statut_sync': statut, 'updatedAt': DateTime.now().toIso8601String()},
       where: 'id = ?',
       whereArgs: [id],
     );

@@ -47,7 +47,7 @@ class PrintService {
                 line('Ref Quitt', '${paiement.id ?? ''}'),
                 pw.SizedBox(height: 4),
                 line('Assujeti', paiement.conducteurNom),
-                line('Montant encaissé', '${paiement.montant.toStringAsFixed(0)} CDF'),
+                line('Montant encaissé', '${(paiement.montant * paiement.quantite).toStringAsFixed(0)} CDF'),
                 line('Mode', 'Espèces'),
                 pw.SizedBox(height: 6),
                 pw.Text('Liste des tarifs / Description', style: pw.TextStyle(fontSize: 10)),

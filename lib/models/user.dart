@@ -21,8 +21,8 @@ class User {
     'nom_poste': nomPoste,
     'agent_nom': agentNom,
     'mot_de_passe': motDePasse,
-    'created_at': createdAt.toIso8601String(),
-    'updated_at': updatedAt.toIso8601String(),
+    'createdAt:': createdAt.toIso8601String(),
+    'updatedAt': updatedAt.toIso8601String(),
   };
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -30,8 +30,8 @@ class User {
     nomPoste: json['nom_poste'] as String,
     agentNom: json['agent_nom'] as String,
     motDePasse: json['mot_de_passe'] as String,
-    createdAt: DateTime.parse(json['created_at'] as String),
-    updatedAt: DateTime.parse(json['updated_at'] as String),
+    createdAt: DateTime.parse(json['createdAt'] as String),
+    updatedAt: DateTime.parse(json['updatedAt'] as String),
   );
 
   User copyWith({

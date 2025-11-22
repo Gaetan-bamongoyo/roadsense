@@ -34,43 +34,45 @@ class _OperationChoiceScreenState extends State<OperationChoiceScreen> {
         title: const Text('Choix de l\'opération'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: [
-                const Icon(Icons.info_outline, color: Colors.blueAccent),
-                const SizedBox(width: 8.0),
-                Expanded(
-                  child: Text(
-                    'Faites ci-dessous le choix entre les différents types de '
-                    'taxe (Péage Route, Pont ou Autres) que vous voulez '
-                    'effectuer.',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.secondary,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: [
+                  const Icon(Icons.info_outline, color: Colors.blueAccent),
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: Text(
+                      'Faites ci-dessous le choix entre les différents types de '
+                      'taxe (Péage Route, Pont ou Autres) que vous voulez '
+                      'effectuer.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.secondary,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            paiementViewModel.categories.isEmpty
-                ? Center(child: CircularProgressIndicator())
-                : Column(
-                    children: [
-                      ...paiementViewModel.categories.map((cat) {
-                        return _buildOperationCard(
-                          icon: Icons.directions_car,
-                          title: 'Taxation > ${cat.designation}',
-                          description: cat.description,
-                          id: cat.id!
-                        );
-                      }),
-                    ],
-                  ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 10),
+              paiementViewModel.categories.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : Column(
+                      children: [
+                        ...paiementViewModel.categories.map((cat) {
+                          return _buildOperationCard(
+                            icon: Icons.directions_car,
+                            title: 'Taxation > ${cat.designation}',
+                            description: cat.description,
+                            id: cat.id!
+                          );
+                        }),
+                      ],
+                    ),
+            ],
+          ),
         ),
       ),
     );

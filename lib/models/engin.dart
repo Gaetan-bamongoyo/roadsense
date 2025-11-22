@@ -34,8 +34,8 @@ class Taxe {
     tarif: (json['tarif'] as num).toDouble(),
     categorieId: json['categorie_id'] as int,
     iconName: (json['icon_name'] ?? '') as String,
-    createdAt: DateTime.parse(json['updated_at']),
-    updatedAt: DateTime.parse(json['updated_at']),
+    createdAt: DateTime.parse(json['createdAt']),
+    updatedAt: DateTime.parse(json['updatedAt']),
   );
 
   Taxe copyWith({

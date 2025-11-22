@@ -188,7 +188,7 @@ class _NouveauPaiementViewState extends State<NouveauPaiementView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Montant à payer',
+                              "Montant à \n payer",
                               style: theme.textTheme.titleLarge?.copyWith(
                                 color: theme.colorScheme.onPrimaryContainer,
                                 fontWeight: FontWeight.bold,

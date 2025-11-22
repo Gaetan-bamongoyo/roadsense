@@ -43,7 +43,11 @@ class ExcelService {
     sheet.cell(CellIndex.indexByString('C$row')).value = TextCellValue('TOTAL:');
     sheet.cell(CellIndex.indexByString('D$row')).value = DoubleCellValue(total);
     
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = Platform.isAndroid
+    ? Directory('/storage/emulated/0/Download')
+    : await getApplicationDocumentsDirectory();
+
+    // final directory = await getApplicationDocumentsDirectory();
     final fileName = 'rapport_${dateFormat.format(date).replaceAll('/', '-')}.xlsx';
     final filePath = '${directory.path}/$fileName';
     

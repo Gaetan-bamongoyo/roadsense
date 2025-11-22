@@ -9,7 +9,6 @@ import 'package:roadsense/viewmodels/paiement_viewmodel.dart';
 import 'package:roadsense/viewmodels/historique_viewmodel.dart';
 import 'package:roadsense/viewmodels/sync_viewmodel.dart';
 import 'package:roadsense/views/auth/login_view.dart';
-import 'package:roadsense/views/home/categorie_view.dart';
 import 'package:roadsense/views/home/home_view.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

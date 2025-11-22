@@ -281,6 +281,7 @@ import 'package:roadsense/services/database_service.dart';
 import 'package:roadsense/services/qr_service.dart';
 import 'package:roadsense/services/print_service.dart';
 import 'package:roadsense/models/categorie.dart';
+import 'package:roadsense/services/storage_service.dart';
 
 class PaiementViewModel extends ChangeNotifier {
   List<Taxe> _engins = [];
@@ -325,8 +326,10 @@ class PaiementViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final db = DatabaseService.instance;
-      _categories = await db.getAllCategories();
+      final db = StorageService.instance;
+      _categories = await db.loadCategorie();
+      // final db = DatabaseService.instance;
+      // _categories = await db.getAllCategories();
       _isLoading = false;
       notifyListeners();
     } catch (e) {

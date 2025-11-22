@@ -73,8 +73,9 @@ class SyncService {
       }
 
       final result = await ApiService.instance.syncEngin();
+      final categorie = await ApiService.instance.syncCategorie();
 
-      if (result != false){
+      if (result != false && categorie != false){
         success++;
       }
 

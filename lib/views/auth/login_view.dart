@@ -29,7 +29,7 @@ class _LoginViewState extends State<LoginView> {
     final success = await authViewModel.login(
       _nomPosteController.text.trim(),
       _motDePasseController.text,
-    );
+    ); 
 
     if (success && mounted) {
       Navigator.of(context).pushReplacement(

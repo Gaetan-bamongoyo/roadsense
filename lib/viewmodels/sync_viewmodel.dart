@@ -33,16 +33,16 @@ class SyncViewModel extends ChangeNotifier {
       } 
 
       final result = await SyncService.instance.syncPaiements();
-      // final tarif = await SyncService.instance.syncEngins();
+      final tarif = await SyncService.instance.syncEngins();
       String message = '';
 
-      // if (tarif.total == 0) {
-      //   message += 'Aucun tarif à synchroniser';
-      // } else if (result.failed == 0) {
-      //   message += '${tarif.success} tarif synchronisés avec succès';
-      // } else {
-      //   message += '${tarif.success} synchronisés, ${result.failed} échoués';
-      // }
+      if (tarif.total == 0) {
+        message += 'Aucun tarif à synchroniser';
+      } else if (result.failed == 0) {
+        message += '${tarif.success} tarif synchronisés avec succès';
+      } else {
+        message += '${tarif.success} synchronisés, ${result.failed} échoués';
+      }
 
       if (result.total == 0) {
         message += 'Aucun paiement à synchroniser';

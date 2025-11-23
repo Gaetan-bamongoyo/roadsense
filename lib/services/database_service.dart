@@ -14,7 +14,7 @@ class DatabaseService {
   /// Retourne la base de données initialisée ou la crée si nécessaire
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('roadsense.db');
+    _database = await _initDB('roadsenses.db');
     return _database!;
   }
 
@@ -75,6 +75,7 @@ class DatabaseService {
         statut_sync INTEGER DEFAULT 0,
         poste_id INTEGER NOT NULL,
         nom_poste TEXT NOT NULL,
+        nom_agent TEXT NOT NULL,
         createdAt TEXT NOT NULL,
         updatedAt TEXT NOT NULL,
         FOREIGN KEY (type_engin_id) REFERENCES engins (id),
@@ -89,13 +90,13 @@ class DatabaseService {
   Future<void> _insertDefaultData(Database db) async {
     final now = DateTime.now().toIso8601String();
 
-    await db.insert('postes', {
-      'nom_poste': 'A1',
-      'agent_nom': 'Agent Demo',
-      'mot_de_passe': 'demo123',
-      'createdAt': now,
-      'updatedAt': now,
-    });
+    // await db.insert('postes', {
+    //   'nom_poste': 'A1',
+    //   'agent_nom': 'Agent Demo',
+    //   'mot_de_passe': 'demo123',
+    //   'createdAt': now,
+    //   'updatedAt': now,
+    // });
 
     final engins = [
       {
@@ -137,11 +138,7 @@ class DatabaseService {
     ];
 
     for (var engin in engins) {
-      await db.insert('engins', {
-        ...engin,
-        'createdAt': now,
-        'updatedAt': now,
-      });
+      await db.insert('engins', {...engin, 'createdAt': now, 'updatedAt': now});
     }
 
     final categories = [
@@ -201,7 +198,6 @@ class DatabaseService {
       limit: 1,
     );
     if (maps.isEmpty) return null;
-    // print(maps);
     return User.fromJson(maps.first);
   }
 
@@ -234,6 +230,11 @@ class DatabaseService {
   Future<int> insertPaiement(Paiement paiement) async {
     final db = await database;
     return await db.insert('paiements', paiement.toJson());
+  }
+
+  Future<int> insertUser(User user) async {
+    final db = await database;
+    return await db.insert('postes', user.toJson());
   }
 
   /// Récupérer les paiements d’une date donnée

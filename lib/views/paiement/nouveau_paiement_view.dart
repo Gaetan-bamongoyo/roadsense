@@ -60,6 +60,7 @@ class _NouveauPaiementViewState extends State<NouveauPaiementView> {
     final success = await paiementViewModel.enregistrerPaiement(
       authViewModel.currentUser!.id!,
       authViewModel.currentUser!.nomPoste,
+      authViewModel.currentUser!.agentNom
     );
 
     if (success && mounted) {
@@ -195,7 +196,7 @@ class _NouveauPaiementViewState extends State<NouveauPaiementView> {
                               ),
                             ),
                             Text(
-                              '${(paiementViewModel.selectedEngin!.tarif * paiementViewModel.quantite).toStringAsFixed(0)} FCFA',
+                              '${(paiementViewModel.selectedEngin!.tarif * paiementViewModel.quantite).toStringAsFixed(0)} CDF',
                               style: theme.textTheme.headlineMedium?.copyWith(
                                 color: theme.colorScheme.primary,
                                 fontWeight: FontWeight.bold,
@@ -319,7 +320,7 @@ class EnginCard extends StatelessWidget {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        '${engin.tarif.toStringAsFixed(0)} FCFA',
+                        '${engin.tarif.toStringAsFixed(0)} CDF',
                         style: theme.textTheme.titleMedium?.copyWith(
                           color: theme.colorScheme.tertiary,
                           fontWeight: FontWeight.w600,

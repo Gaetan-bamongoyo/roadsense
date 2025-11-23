@@ -25,6 +25,10 @@ class StorageService {
     await _prefs?.setBool('is_logged_in', true);
   }
 
+  Future<void> saveUserSessionOnLigne() async {
+    await _prefs?.setBool('is_connected_in_ligne', true);
+  }
+
   Future<List<Categorie>> loadCategorie() async {
     final prefs = await SharedPreferences.getInstance();
     final data = prefs.getString('categories');
@@ -74,4 +78,5 @@ class StorageService {
   int? get userId => _prefs?.getInt('user_id');
   String? get nomPoste => _prefs?.getString('nom_poste');
   String? get agentNom => _prefs?.getString('agent_nom');
+  bool get connectedOnLigne => _prefs?.getBool('is_connected_in_ligne') ?? false;
 }

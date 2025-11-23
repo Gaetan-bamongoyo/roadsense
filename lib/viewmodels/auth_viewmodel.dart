@@ -60,7 +60,7 @@ class AuthViewModel extends ChangeNotifier {
       notifyListeners();
       return false;
     }
-  }
+  } 
 
   Future<void> logout() async {
     await StorageService.instance.clearUserSession();

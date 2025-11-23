@@ -412,7 +412,7 @@ class PaiementViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> enregistrerPaiement(int posteId, String nomPoste) async {
+  Future<bool> enregistrerPaiement(int posteId, String nomPoste, String nomAgent) async {
     if (!canSubmit) return false;
 
     _isLoading = true;
@@ -430,6 +430,7 @@ class PaiementViewModel extends ChangeNotifier {
         statutSync: 0,
         posteId: posteId,
         nomPoste: nomPoste,
+        nomAgent: nomAgent
       );
 
       final id = await DatabaseService.instance.insertPaiement(paiement);

@@ -332,7 +332,7 @@ class PaiementCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${(paiement.montant * paiement.quantite).toStringAsFixed(0)} FCFA',
+                      '${(paiement.montant * paiement.quantite).toStringAsFixed(0)} CDF',
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold,

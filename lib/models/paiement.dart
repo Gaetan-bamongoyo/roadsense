@@ -9,12 +9,14 @@ class Paiement {
   final int statutSync;
   final int posteId;
   final String nomPoste;
+  final String nomAgent;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   Paiement({
     this.id,
     required this.conducteurNom,
+    required this.nomAgent,
     required this.typeEnginId,
     required this.typeEnginNom,
     required this.montant,
@@ -41,6 +43,7 @@ class Paiement {
     'statut_sync': statutSync,
     'poste_id': posteId,
     'nom_poste': nomPoste,
+    'nom_agent': nomAgent,
     'createdAt': createdAt.toIso8601String(),
     'updatedAt': updatedAt.toIso8601String(),
   };
@@ -56,6 +59,7 @@ class Paiement {
     statutSync: json['statut_sync'] as int,
     posteId: json['poste_id'] as int,
     nomPoste: json['nom_poste'] as String,
+    nomAgent: json['nom_agent'] as String,
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
   );
@@ -71,6 +75,7 @@ class Paiement {
     int? statutSync,
     int? posteId,
     String? nomPoste,
+    String? nomAgent,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) => Paiement(
@@ -84,6 +89,7 @@ class Paiement {
     statutSync: statutSync ?? this.statutSync,
     posteId: posteId ?? this.posteId,
     nomPoste: nomPoste ?? this.nomPoste,
+    nomAgent: nomAgent ?? this.nomAgent,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
   );

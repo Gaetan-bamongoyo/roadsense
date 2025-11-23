@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:roadsense/print.dart';
 import 'package:roadsense/theme.dart';
 import 'package:roadsense/services/database_service.dart';
 import 'package:roadsense/services/storage_service.dart';
@@ -47,9 +48,30 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode: ThemeMode.system,
             home: authViewModel.isAuthenticated ? const HomeView() : const LoginView(),
-            // home: HomeView(),
+            // home: ButtonPrint(),
           );
         },
+      ),
+    );
+  }
+}
+
+class ButtonPrint extends StatefulWidget {
+  const ButtonPrint({super.key});
+
+  @override
+  State<ButtonPrint> createState() => _ButtonPrintState();
+}
+
+class _ButtonPrintState extends State<ButtonPrint> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: GestureDetector(
+          onTap: () => printPaiementTicket(),
+          child: Text("Print"),
+        ),
       ),
     );
   }

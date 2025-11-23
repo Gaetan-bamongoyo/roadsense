@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:roadsense/models/categorie.dart';
 import 'package:roadsense/models/engin.dart';
 import 'package:roadsense/models/paiement.dart';
+import 'package:roadsense/models/user.dart';
 import 'package:roadsense/services/storage_service.dart';
 
 class ApiService {
@@ -24,9 +25,10 @@ class ApiService {
           "tarif_id": paiement.typeEnginId,
           "poste_id": paiement.posteId,
           "quantite": paiement.quantite,
+          "nom_agent": paiement.nomAgent
         }),
       );
-      print("Status: ${response.statusCode}");
+      print("Status ${paiement.nomAgent}: ${response.statusCode}");
       print("Body: ${response.body}");
 
       return response.statusCode == 200 || response.statusCode == 201;
@@ -86,15 +88,17 @@ class ApiService {
     final response = await http.post(
       Uri.parse('$baseUrl/poste/login'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({}),
+      body: jsonEncode({
+        "nom_poste":nom,
+        "mot_de_passe":motdepasse
+      }),
     );
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      StorageService.instance.saveUserSession(
-        data['poste']['id'],
-        data['poste']['nom_poste'],
-        data['poste']['agent_nom'],
-      );
+      final json = jsonDecode(response.body);
+      final convert = json['poste'] as List<dynamic>;
+      final data = convert.map((e) => User.fromJson(e)).toList();
+      await StorageService.instance.saveUserSessionOnLigne();
+      print(data);
       return true;
     } else {
       return false;
